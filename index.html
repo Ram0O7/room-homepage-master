@@ -64,7 +64,11 @@
       object-fit: fill;
     }
 
-    nav button{
+    .backdrop {
+      display: none;
+    }
+
+    nav .nav-btn {
       display: none;
     }
 
@@ -75,16 +79,16 @@
       position: absolute;
       top: 3rem;
       left: 3rem;
-      z-index: 999;
+      z-index: 10;
     }
 
-    nav ul {
+    .nav-links {
       list-style: none;
       display: flex;
       gap: 1.5rem;
     }
 
-    nav ul li a {
+    .nav-links li a {
       text-decoration: none;
       color: inherit;
     }
@@ -186,11 +190,45 @@
         font-size: 0.85rem;
       }
 
-      nav button{
+      .backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100%;
+        background-color: rgb(0, 0, 0, 0.4);
+        z-index: 50;
+      }
+
+      .modal {
+        position: absolute;
+        top: 0;
+        padding: 1rem;
+        padding-left: 0;
+        font-size: 1.2rem;
+        font-weight: 700;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 2rem;
+        left: 0;
+        height: 6rem;
+        width: 100%;
+        background-color: var(--White);
+        z-index: 100;
+      }
+
+      .modal .close-btn {
+        width: 1.2rem;
+        height: 1.2rem;
+      }
+
+      nav .nav-btn {
         width: 2rem;
         display: block;
         background: url(images/icon-hamburger.svg);
         background-repeat: no-repeat;
+        z-index: 999;
       }
 
       nav {
@@ -199,7 +237,7 @@
         gap: 1.5rem;
       }
 
-      nav ul {
+      nav .nav-links {
         display: none;
       }
 
@@ -207,12 +245,14 @@
         display: block;
       }
 
-      .hero-content,.about-content {
+      .hero-content,
+      .about-content {
         min-height: 20rem;
         padding: 2rem 1.5rem 2rem 1.5rem;
         justify-content: space-between;
       }
-      .about-content{
+
+      .about-content {
         min-height: fit-content;
         justify-content: flex-start;
       }
@@ -243,10 +283,21 @@
 </head>
 
 <body>
+  <div class="backdrop">
+    <div class="modal">
+      <button class="close-btn"><img src="images/icon-close.svg" alt="close"></button>
+      <ul class="nav-links">
+        <li><a href="index.html">home</a></li>
+        <li><a href="index.html">shop</a></li>
+        <li><a href="index.html">about</a></li>
+        <li><a href="index.html">contact</a></li>
+      </ul>
+    </div>
+  </div>
   <nav>
     <button class="nav-btn"></button>
     <img class="logo" src="./images/logo.svg" alt="room">
-    <ul>
+    <ul class="nav-links">
       <li><a href="index.html">home</a></li>
       <li><a href="index.html">shop</a></li>
       <li><a href="index.html">about</a></li>
@@ -286,21 +337,38 @@
     const heroImg = document.getElementById('heroImg');
     const heroHeading = document.querySelector('.hero-content-heading');
     const heroPara = document.querySelector('.hero-content-para');
+    const navBtn = document.querySelector('.nav-btn');
+    const closeBtn = document.querySelector('.close-btn');
     const prevBtn = document.getElementById('prev');
     const nextBtn = document.getElementById('next');
+    const backdrop = document.querySelector('.backdrop');
 
     const heroContent = {
       images: ['./images/desktop-image-hero-1.jpg', './images/desktop-image-hero-2.jpg', './images/desktop-image-hero-3.jpg'],
+      mobileImages: ['./images/mobile-image-hero-1.jpg', './images/mobile-image-hero-2.jpg', './images/mobile-image-hero-3.jpg'],
       headings: ["Discover innovative ways to decorate", "We are available all across the globe", "Manufactured with the best materials"],
       paragraphs: ["We provide unmatched quality, comfort, and style for property owners across the country. Our experts combine form and function in bringing your vision to life. Create a room in your own style with our collection and make your property a reflection of you and what you love.",
         "With stores all over the world, it's easy for you to find furniture for your home or place of business. Locally, we’re in most major cities throughout the country. Find the branch nearest you using our store locator. Any questions? Don't hesitate to contact us today.",
         "Our modern furniture store provide a high level of quality. Our company has invested in advanced technology to ensure that every product is made as perfect and as consistent as possible. With three decades of experience in this industry, we understand what customers want for their home and office."]
     }
 
+
     let contentIndex = 0;
+    let isMobile = false;
+
+    function myMediaFn(match) {
+      if (match.matches) {
+        heroImg.setAttribute('src', heroContent.mobileImages[0]);
+        isMobile = true;
+      }
+    }
+
+    let myMedia = window.matchMedia("(max-width: 480px)")
+    myMediaFn(myMedia) // Call listener function at run time
+    myMedia.addListener(myMediaFn) // Attach listener function on state changes
 
     function toggleHeroContent(index) {
-      heroImg.setAttribute('src', heroContent.images[index]);
+      heroImg.setAttribute('src', isMobile ? heroContent.mobileImages[index] : heroContent.images[index]);
       heroHeading.innerText = heroContent.headings[index];
       heroPara.innerText = heroContent.paragraphs[index];
     }
@@ -322,6 +390,9 @@
       }
       toggleHeroContent(contentIndex);
     });
+
+    navBtn.addEventListener("click", () => backdrop.style.display = "block")
+    closeBtn.addEventListener("click", () => backdrop.style.display = "none")
   </script>
 </body>
 
