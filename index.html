@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <title>Frontend Mentor | Room homepage</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;600;700&display=swap');
+
+    :root {
+      --Dark-Gray: hsl(0, 0%, 63%);
+      --Black: hsl(0, 0%, 0%);
+      --White: hsl(0, 0%, 100%);
+      --Very-Dark-Gray: hsl(0, 0%, 27%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'League Spartan', sans-serif;
+    }
+
+    ::-webkit-scrollbar {
+      width: 0.5rem;
+      background-color: var(--Very-Dark-Gray);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: var(--Dark-Gray);
+    }
+
+    button {
+      background: none;
+      border: none;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 700;
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 600;
+    }
+
+    p {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--Dark-Gray);
+      line-height: 1.25rem;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+    }
+
+    nav button{
+      display: none;
+    }
+
+    nav {
+      display: flex;
+      gap: 3rem;
+      color: var(--White);
+      position: absolute;
+      top: 3rem;
+      left: 3rem;
+      z-index: 999;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    section {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+    }
+
+    .hero-img {
+      grid-column: 1 / 5;
+    }
+
+    .hero-content,
+    .about-content {
+      position: relative;
+      grid-column: 5 / 8;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding: 8rem 4rem 8rem 6rem;
+    }
+
+    .shop-btn {
+      padding-right: 3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5rem;
+      align-self: flex-start;
+      background: url(images/icon-arrow.svg);
+      background-repeat: no-repeat;
+      background-position: right;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: padding 200ms ease-in;
+    }
+
+    .shop-btn:hover {
+      color: var(--Dark-Gray);
+      padding-right: 4rem;
+    }
+
+
+    .btn-container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 204px;
+      height: 4rem;
+      background-color: var(--Black);
+    }
+
+    .btn-container img {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    #prev,
+    #next {
+      height: 100%;
+      width: 50%;
+    }
+
+    #prev:hover {
+      background-color: var(--Very-Dark-Gray);
+    }
+
+    #next:hover {
+      background-color: var(--Very-Dark-Gray);
+    }
+
+    .about-content {
+      grid-column: 3 / 6;
+      padding: 4rem 6rem 4rem 4rem;
+    }
+
+    .about-img-dark {
+      grid-column: 1 / 3;
+    }
+
+    .about-img-light {
+      grid-column: 6 / 8;
+    }
+
+    @media (max-width:480px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      p {
+        font-size: 0.85rem;
+      }
+
+      nav button{
+        width: 2rem;
+        display: block;
+        background: url(images/icon-hamburger.svg);
+        background-repeat: no-repeat;
+      }
+
+      nav {
+        top: 2rem;
+        left: 1.5rem;
+        gap: 1.5rem;
+      }
+
+      nav ul {
+        display: none;
+      }
+
+      section {
+        display: block;
+      }
+
+      .hero-content,.about-content {
+        min-height: 20rem;
+        padding: 2rem 1.5rem 2rem 1.5rem;
+        justify-content: space-between;
+      }
+      .about-content{
+        min-height: fit-content;
+        justify-content: flex-start;
+      }
+
+      .hero-img {
+        position: relative;
+      }
+
+      .btn-container {
+        left: unset;
+        right: 0;
+        top: -3.25rem;
+        width: 6rem;
+        height: 3rem;
+      }
+
+      #prev,
+      #next {
+        width: 2.85rem;
+      }
+
+      .btn-container img {
+        width: 0.75rem;
+        height: 0.75rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <button class="nav-btn"></button>
+    <img class="logo" src="./images/logo.svg" alt="room">
+    <ul>
+      <li><a href="index.html">home</a></li>
+      <li><a href="index.html">shop</a></li>
+      <li><a href="index.html">about</a></li>
+      <li><a href="index.html">contact</a></li>
+    </ul>
+  </nav>
+  <section>
+    <div class="hero-img">
+      <img id="heroImg" src="./images/desktop-image-hero-1.jpg" alt="hero-img">
+    </div>
+    <div class="hero-content">
+      <h1 class="hero-content-heading">Discover innovative ways to decorate</h1>
+      <p class="hero-content-para">We provide unmatched quality, comfort, and style for property owners across the
+        country.
+        Our experts combine form and function in bringing your vision to life. Create a room in your
+        own style with our collection and make your property a reflection of you and what you love.
+      </p>
+      <button class="shop-btn">Shop now</button>
+      <div class="btn-container">
+        <button id="prev"><img src="images/icon-angle-left.svg" alt="left"></button>
+        <button id="next"><img src="images/icon-angle-right.svg" alt="right"></button>
+      </div>
+    </div>
+    <div class="about-img-dark"><img src="images/image-about-dark.jpg" alt="about dark"></div>
+    <div class="about-content">
+      <h2>About our furniture</h2>
+      <p>Our multifunctional collection blends design and function to suit your individual taste.
+        Make each room unique, or pick a cohesive theme that best express your interests and what
+        inspires you. Find the furniture pieces you need, from traditional to contemporary styles
+        or anything in between. Product specialists are available to help you create your dream space.
+      </p>
+    </div>
+    <div class="about-img-light"><img src="images/image-about-light.jpg" alt="about light"></div>
+  </section>
+
+  <script>
+    const heroImg = document.getElementById('heroImg');
+    const heroHeading = document.querySelector('.hero-content-heading');
+    const heroPara = document.querySelector('.hero-content-para');
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
+
+    const heroContent = {
+      images: ['./images/desktop-image-hero-1.jpg', './images/desktop-image-hero-2.jpg', './images/desktop-image-hero-3.jpg'],
+      headings: ["Discover innovative ways to decorate", "We are available all across the globe", "Manufactured with the best materials"],
+      paragraphs: ["We provide unmatched quality, comfort, and style for property owners across the country. Our experts combine form and function in bringing your vision to life. Create a room in your own style with our collection and make your property a reflection of you and what you love.",
+        "With stores all over the world, it's easy for you to find furniture for your home or place of business. Locally, we’re in most major cities throughout the country. Find the branch nearest you using our store locator. Any questions? Don't hesitate to contact us today.",
+        "Our modern furniture store provide a high level of quality. Our company has invested in advanced technology to ensure that every product is made as perfect and as consistent as possible. With three decades of experience in this industry, we understand what customers want for their home and office."]
+    }
+
+    let contentIndex = 0;
+
+    function toggleHeroContent(index) {
+      heroImg.setAttribute('src', heroContent.images[index]);
+      heroHeading.innerText = heroContent.headings[index];
+      heroPara.innerText = heroContent.paragraphs[index];
+    }
+
+    prevBtn.addEventListener("click", () => {
+      if (contentIndex === 0) {
+        contentIndex = heroContent.images.length - 1
+      } else {
+        contentIndex--;
+      }
+      toggleHeroContent(contentIndex);
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (contentIndex === heroContent.images.length - 1) {
+        contentIndex = 0
+      } else {
+        contentIndex++;
+      }
+      toggleHeroContent(contentIndex);
+    });
+  </script>
+</body>
+
+</html>
